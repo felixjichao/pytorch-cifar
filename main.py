@@ -68,7 +68,8 @@ print('==> Building model..')
 # net = ShuffleNetV2(1)
 # net = EfficientNetB0()
 # net = RegNetX_200MF()
-net = SimpleDLA()
+# net = SimpleDLA()
+net = ResNet50()
 net = net.to(device)
 if device == 'cuda':
     net = torch.nn.DataParallel(net)
@@ -148,7 +149,9 @@ def test(epoch):
         best_acc = acc
 
 
-for epoch in range(start_epoch, start_epoch+200):
-    train(epoch)
-    test(epoch)
-    scheduler.step()
+if __name__ == '__main__':
+
+    for epoch in range(start_epoch, start_epoch+200):
+        train(epoch)
+        test(epoch)
+        scheduler.step()
